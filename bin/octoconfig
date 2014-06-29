@@ -1,23 +1,29 @@
 #!/usr/bin/env ruby
 require 'gli'
 require 'octoconfig'
+require 'open3'
 
 include GLI::App
 
-program_desc 'Help to setup octohost daemons through data elsewhere.'
+program_desc 'Setup octohost config files through Consul data.'
 
 version Octoconfig::VERSION
 
 desc 'Verbose.'
 switch [:v,:verbose]
 
-desc 'Configuration to update.'
+desc 'Daemon to update.'
 default_value 'proxy'
 arg_name 'daemon'
 flag [:d,:daemon]
 
+desc 'Config file to update.'
+default_value '/etc/nginx/containers.conf'
+arg_name 'config'
+flag [:c,:config]
+
 desc 'Command to get the service catalog.'
-default_value '/usr/bin/octo services:catalog'
+default_value 'octo services:catalog'
 arg_name 'services'
 flag [:s,:services]
 
@@ -33,6 +39,20 @@ command :update do |c|
   c.action do |global_options,options,args|
 
     # Get the services.
+    puts "Getting the services."
+
+    # Open3.popen3(global_options[:services]) do |stdin, stdout, stderr, wait_thr|
+    #   puts "stdout is:" + stdout.read
+    #   puts "stderr is:" + stderr.read
+    # end
+
+    stdout_str, stderr_str, status = Open3.capture3(global_options[:services])
+    puts status.inspect
+    unless status.exitstatus == 0
+      puts "There was a problem running '#{global_options[:services]}'"
+      puts stderr_str
+      exit -1
+    end
 
     # Update the config.
 
