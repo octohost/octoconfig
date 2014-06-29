@@ -2,6 +2,7 @@
 require 'gli'
 require 'octoconfig'
 require 'open3'
+require 'erb'
 
 include GLI::App
 
