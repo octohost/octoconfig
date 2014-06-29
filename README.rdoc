@@ -1,0 +1,6 @@
+= octoconfig
+
+Describe your project here
+
+:include:octoconfig.rdoc
+

@@ -1,0 +1,5 @@
+= octoconfig
+
+Generate this with
+    octoconfig rdoc
+After you have described your command line interface
