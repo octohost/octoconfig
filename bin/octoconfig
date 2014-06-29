@@ -4,27 +4,27 @@ require 'octoconfig'
 
 include GLI::App
 
-program_desc 'Pull the configuration file out of Consul to setup octohost daemons.'
+program_desc 'Help to setup octohost daemons through data in Consul.'
 
 version Octoconfig::VERSION
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+desc 'Verbose.'
+switch [:v,:verbose]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
+desc 'Configuration to update.'
+default_value 'nginx'
+arg_name 'daemon'
+flag [:d,:daemon]
 
-desc 'Describe update here'
-arg_name 'Describe arguments to update here'
+desc 'Command to get the Consul service catalog.'
+default_value '/usr/bin/octo services:catalog'
+arg_name 'services'
+flag [:s,:services]
+
+desc 'Update the config for {daemon}'
+arg_name 'Need a command to run to get the data.'
 command :update do |c|
-  c.desc 'Describe a switch to update'
-  c.switch :s
 
-  c.desc 'Describe a flag to update'
-  c.default_value 'default'
-  c.flag :f
   c.action do |global_options,options,args|
 
     # Your command logic here
