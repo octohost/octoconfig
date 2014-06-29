@@ -49,24 +49,20 @@ command :update do |c|
     services = Services.new
     services.get(global_options[:services], global_options[:tag])
 
-    puts services.inspect
+    # Load the ./lib/daemons/global_options[:daemon]/global_options[:tag] file.
+    filename = "../lib/daemons/#{global_options[:daemon]}/#{global_options[:tag]}.rb"
+    require_relative filename
 
-    # stdout_str, stderr_str, status = Open3.capture3(global_options[:services])
-    #
-    # unless status.exitstatus == 0
-    #   puts "There was a problem running '#{global_options[:services]}'"
-    #   puts stderr_str
-    #   exit -1
-    # end
+    template = Template.new(services, global_options[:daemon], global_options[:tag])
+    template_content = template.render
 
-    # Update the config.
+    # Update the config at global_options[:config]
+    File.open(global_options[:config], 'w') { |file| file.write(template_content) }
 
     # Restart the daemon.
+    `#{global_options[:reload]}`
 
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-
-    puts "update command ran"
+    puts "Config: #{global_options[:config]} for #{global_options[:daemon]} with #{global_options[:tag]} tag updated."
   end
 end
 

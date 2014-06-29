@@ -1,0 +1,9 @@
+server {
+  server_name  <%= @domains %>;
+
+  location / {
+    <% for @url in @urls -%>
+    proxy_pass      <%= @url %>;
+    <% end -%>
+  }
+}
