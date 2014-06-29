@@ -62,7 +62,7 @@ command :update do |c|
     # Restart the daemon.
     `#{global_options[:reload]}`
 
-    puts "Config: #{global_options[:config]} for #{global_options[:daemon]} with #{global_options[:tag]} tag updated."
+    puts "Config: #{global_options[:config]} for #{global_options[:daemon]} daemon with #{global_options[:tag]} tag updated."
   end
 end
 

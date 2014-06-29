@@ -1,4 +1,5 @@
 class Services
+  attr_reader :data
   def initialize()
     @data = Hash.new { |hash, key| hash[key] = [] }
   end
