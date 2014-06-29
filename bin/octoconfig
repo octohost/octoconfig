@@ -41,18 +41,16 @@ command :update do |c|
     # Get the services.
     puts "Getting the services."
 
-    # Open3.popen3(global_options[:services]) do |stdin, stdout, stderr, wait_thr|
-    #   puts "stdout is:" + stdout.read
-    #   puts "stderr is:" + stderr.read
-    # end
+    services = Services.new
+    services.get(global_options[:services], 'http')
 
-    stdout_str, stderr_str, status = Open3.capture3(global_options[:services])
-    puts status.inspect
-    unless status.exitstatus == 0
-      puts "There was a problem running '#{global_options[:services]}'"
-      puts stderr_str
-      exit -1
-    end
+    # stdout_str, stderr_str, status = Open3.capture3(global_options[:services])
+    #
+    # unless status.exitstatus == 0
+    #   puts "There was a problem running '#{global_options[:services]}'"
+    #   puts stderr_str
+    #   exit -1
+    # end
 
     # Update the config.
 
