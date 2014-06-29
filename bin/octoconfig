@@ -32,6 +32,11 @@ default_value 'service proxy reload'
 arg_name 'reload'
 flag [:r,:reload]
 
+desc 'Tag to look for in the service catalog.'
+default_value 'http'
+arg_name 'tag'
+flag [:t,:tag]
+
 desc 'Update the config for a {daemon}'
 arg_name 'update'
 command :update do |c|
@@ -42,7 +47,9 @@ command :update do |c|
     puts "Getting the services."
 
     services = Services.new
-    services.get(global_options[:services], 'http')
+    services.get(global_options[:services], global_options[:tag])
+
+    puts services.inspect
 
     # stdout_str, stderr_str, status = Open3.capture3(global_options[:services])
     #
