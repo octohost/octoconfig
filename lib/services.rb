@@ -17,8 +17,7 @@ class Services
         if service['ServiceTags'].include? service_type
           name = service['ServiceName']
           url = "http://#{service['Address']}:#{service['ServicePort']}"
-          # urls[name] = %W( #{url} )
-          puts "#{name} at #{url}"
+          self[name] = %W( #{url} )
         end
       end
     end
