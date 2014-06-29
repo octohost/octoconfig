@@ -4,7 +4,7 @@ require 'octoconfig'
 
 include GLI::App
 
-program_desc 'Help to setup octohost daemons through data in Consul.'
+program_desc 'Help to setup octohost daemons through data elsewhere.'
 
 version Octoconfig::VERSION
 
@@ -12,22 +12,31 @@ desc 'Verbose.'
 switch [:v,:verbose]
 
 desc 'Configuration to update.'
-default_value 'nginx'
+default_value 'proxy'
 arg_name 'daemon'
 flag [:d,:daemon]
 
-desc 'Command to get the Consul service catalog.'
+desc 'Command to get the service catalog.'
 default_value '/usr/bin/octo services:catalog'
 arg_name 'services'
 flag [:s,:services]
 
-desc 'Update the config for {daemon}'
-arg_name 'Need a command to run to get the data.'
+desc 'Command to reload the daemon.'
+default_value 'service proxy reload'
+arg_name 'reload'
+flag [:r,:reload]
+
+desc 'Update the config for a {daemon}'
+arg_name 'update'
 command :update do |c|
 
   c.action do |global_options,options,args|
 
-    # Your command logic here
+    # Get the services.
+
+    # Update the config.
+
+    # Restart the daemon.
 
     # If you have any errors, just raise them
     # raise "that command made no sense"
