@@ -30,10 +30,13 @@ class Template
   end
 
   def combine(name)
-    template = "# ServiceName: #{name}\nserver {\n  server_name #{@domains.chomp};\n  location / {\n"
+    template = "# ServiceName: #{name}\n"
+    template = "upstream #{name} {\n"
     @urls.each do |url|
-      template += "    proxy_pass #{url};\n"
+      template += "  server #{url.gsub(/http:\/\//, '')};\n"
     end
+    template += "}\n"
+    template += "server {\n  server_name #{@domains.chomp};\n  location / {\n    proxy_pass http://#{name};\n"
     template += "  }\n}\n"
     return template
   end
