@@ -7,7 +7,9 @@ spec = Gem::Specification.new do |s|
   s.email = 'darron@froese.org'
   s.homepage = 'http://www.octohost.io'
   s.platform = Gem::Platform::RUBY
+  s.licenses = ['Apache']
   s.summary = 'Setup octohost config files through Consul data.'
+  s.description = "This is a gem used with the octohost project. It pulls data from Consul and outputs an nginx config file."
   s.files = `git ls-files`.split("
 ")
   s.require_paths << 'lib'
