@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
   s.require_paths << 'lib'
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.rdoc','octoconfig.rdoc']
-  s.rdoc_options << '--title' << 'octoconfig' << '--main' << 'README.rdoc' << '-ri'
+  s.rdoc_options << '--title' << 'octoconfig' << '--main' << 'README.rdoc' << '--ri'
   s.bindir = 'bin'
   s.executables << 'octoconfig'
   s.add_development_dependency('rake')

@@ -1,3 +1,3 @@
 require 'octoconfig/version.rb'
-require './lib/services.rb'
+require 'services.rb'
 require 'json'
