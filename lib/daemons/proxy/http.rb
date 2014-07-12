@@ -36,7 +36,14 @@ class Template
       template += "  server #{url.gsub(/http:\/\//, '')};\n"
     end
     template += "}\n"
-    template += "server {\n  server_name #{@domains.chomp};\n  location / {\n    proxy_pass http://#{name};\n"
+    template += "server {\n"
+    template += "  listen 80;\n"
+    template += "  listen 443 ssl spdy;\n"
+    template += "  include /etc/nginx/ssl.conf;\n"
+    template += "  server_name #{@domains.chomp};\n"
+    template += "  location / {\n"
+    template += "    include /etc/nginx/location.conf;\n"
+    template += "    proxy_pass http://#{name};\n"
     template += "  }\n}\n"
     return template
   end

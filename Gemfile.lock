@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    octoconfig (0.0.3)
+    octoconfig (0.0.4)
       gli (= 2.11.0)
       json
 
