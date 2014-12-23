@@ -21,7 +21,7 @@ class Template
   end
 
   def domains(name)
-    domains = `/usr/bin/consulkv get #{name}/DOMAINS`
+    domains = `/usr/bin/consulkv get octohost/#{name}/DOMAINS`
     unless domains.nil? || domains == ''
       return domains = domains.gsub(/,/, ' ')
     else
